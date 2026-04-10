@@ -35,7 +35,6 @@ output_excel_to_folder/          # 项目根目录（可大写开头，仅根目
     │   ├── resource_manager.py
     │   ├── resource_utils.py
     ├── __init__.py       # 标记为Python包
-    ├── main.py
 └── test/
     ├── __init__.py
     ├── debug_resources.py
@@ -53,6 +52,8 @@ output_excel_to_folder/          # 项目根目录（可大写开头，仅根目
 └── build.py
 └── build_simple.py
 └── cython_setup.py
+└── file_version_info.txt
+└── main.py       # 程序入口
 └── project_structure.md       # 目录说明文档
 └── project_structure.txt
 └── pyside6_excel_clean.spec

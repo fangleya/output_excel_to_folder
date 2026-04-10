@@ -144,6 +144,9 @@ class MainWindow(QMainWindow):
             self.file_list_widget.takeItem(self.file_list_widget.row(item))
 
     def dragEnterEvent(self, event: QDragEnterEvent):
+        # 记录到临时文件，便于打包后排查
+        with open("E:/temp/drag_log.txt", "a") as f:
+            f.write(f"dragEnterEvent: formats={event.mimeData().formats()}, hasUrls={event.mimeData().hasUrls()}\n")
         if event.mimeData().hasUrls():
             event.acceptProposedAction()
         else:
