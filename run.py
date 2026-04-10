@@ -7,7 +7,7 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
 # 导入并运行主程序
-from src.main import main
+from main import main
 
 if __name__ == "__main__":
     main()

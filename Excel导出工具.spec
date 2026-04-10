@@ -5,8 +5,8 @@
 block_cipher = None
 
 a = Analysis(
-    ['src/main.py'],  # 你的入口文件
-    pathex=[],
+    ['main.py'],  # 入口文件
+    pathex=['.'],  # 搜索路径包含
     binaries=[],
     # -------------------------- 专属资源打包配置 --------------------------
     # 格式：(开发环境的相对路径, 打包后的相对路径)，必须保持你的代码路径结构
@@ -17,6 +17,14 @@ a = Analysis(
     # -------------------------- 专属隐藏导入配置（解决模块缺失报错） --------------------------
     # 精准覆盖你的项目所有依赖的隐藏模块，杜绝打包后报「No module named xxx」
     hiddenimports=[
+        "src.app.app_view",
+        "src.app.app_viewmodel",
+        "src.utils.config_manager",
+        "src.utils.dialog_manager",
+        "src.utils.path_utils",
+        "src.utils.resource_manager",
+        "src.utils.resource_utils",
+
         # PySide6核心模块
         "PySide6.QtCore",
         "PySide6.QtGui",
@@ -24,30 +32,35 @@ a = Analysis(
         "PySide6.QtNetwork",
         "PySide6.QtSvg",
         "PySide6.QtOpenGL",
+
         # pandas&numpy依赖（打包头号坑点，必须全量添加）
         "pandas",
         "pandas._libs",
-        "pandas._libs.tslibs.base",
-        "pandas._libs.tslibs.np_datetime",
-        "pandas._libs.tslibs.nattype",
-        "pandas._libs.tslibs.conversion",
+        # "pandas._libs.tslibs.base",
+        # "pandas._libs.tslibs.np_datetime",
+        # "pandas._libs.tslibs.nattype",
+        # "pandas._libs.tslibs.conversion",
+
         "numpy",
-        "numpy.core._multiarray_umath",
-        "numpy.core._multiarray_tests",
-        "numpy.linalg.lapack_lite",
-        "numpy.linalg._umath_linalg",
+        # "numpy.core._multiarray_umath",
+        # "numpy.core._multiarray_tests",
+        # "numpy.linalg.lapack_lite",
+        # "numpy.linalg._umath_linalg",
+
         # Excel处理依赖
         "openpyxl",
-        "openpyxl.cell",
-        "openpyxl.styles",
-        "openpyxl.drawing.image",
-        "openpyxl.worksheet",
+        # "openpyxl.cell",
+        # "openpyxl.styles",
+        # "openpyxl.drawing.image",
+        # "openpyxl.worksheet",
+
         # 图片处理依赖
         "PIL",
-        "PIL._imaging",
-        "PIL._imagingtk",
-        "PIL.Image",
-        "PIL.ImageFile",
+        # "PIL._imaging",
+        # "PIL._imagingtk",
+        # "PIL.Image",
+        # "PIL.ImageFile",
+
         # 其他标准库隐藏依赖
         "zipfile",
         "traceback",
@@ -76,7 +89,7 @@ a = Analysis(
     noarchive=False,
 )
 
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+pyz = PYZ(a.pure, a.pure_zipped, cipher=block_cipher)
 
 exe = EXE(
     pyz,
@@ -90,7 +103,7 @@ exe = EXE(
     upx=True,  # 启用UPX压缩，减小体积
     console=False,  # 调试时改为True，开启控制台看报错，正式发布改为False
     icon='resource/my_app.ico',  # 程序图标，对应你的resource目录下的ico文件
-    uac_admin=False,  # 如需处理系统盘文件，改为True请求管理员权限
+    uac_admin=True,  # 如需处理系统盘文件，改为True请求管理员权限
     version='file_version_info.txt',  # 可选，添加版本信息，避免杀毒误报
 )
 
