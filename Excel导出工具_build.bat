@@ -1,5 +1,6 @@
 @echo off
 chcp 65001 >nul
+setlocal enabledelayedexpansion
 title Excel导出工具 - 一键加密打包脚本
 
 :: ========================== 配置区域（请根据你的环境修改） ==========================
@@ -20,7 +21,7 @@ set BACKUP_DIR=%BACKUP_DIR: =0%
 
 echo ========================================================
 echo     Excel导出工具 - Cython+PyInstaller 一键打包
-echo     虚拟环境类型：%ENV_TYPE%
+echo     虚拟环境类型：if "%ENV_TYPE%"=="conda" ( %CONDA_ENV_NAME% ) else ( %VENV_DIR% )
 echo ========================================================
 echo.
 
@@ -128,7 +129,7 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-echo ✅ Cython 编译成功
+echo ✅ Cython 加密成功
 echo.
 
 :: -------------------------- 5. 清理中间文件 --------------------------
@@ -151,7 +152,7 @@ if not exist "%SPEC_FILE%" (
     pause
     exit /b 1
 )
-pyinstaller "%SPEC_FILE%"
+pyinstaller --clean "%SPEC_FILE%"
 if errorlevel 1 (
     echo ❌ 错误：PyInstaller 打包失败
     pause
