@@ -17,7 +17,7 @@ from PySide6.QtWidgets import (
     QListWidgetItem,
 )
 from PySide6.QtCore import Qt, QThread, Signal, QSettings
-from PySide6.QtGui import QDragEnterEvent, QDropEvent, QFont
+from PySide6.QtGui import QDragEnterEvent, QDragMoveEvent, QDropEvent, QDragLeaveEvent, QFont
 
 # 🔥 关键修复：从core导入处理函数，不再导入main，无循环！
 from .app_viewmodel import process_excel_to_files
@@ -97,7 +97,8 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(list_label)
         self.file_list_widget = QListWidget()
         self.file_list_widget.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
-        self.file_list_widget.setDragDropMode(QAbstractItemView.DragDropMode.DropOnly)
+        # self.file_list_widget.setDragDropMode(QAbstractItemView.DragDropMode.DropOnly)
+        self.file_list_widget.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
         self.file_list_widget.setAcceptDrops(True)
         self.file_list_widget.installEventFilter(self)
         main_layout.addWidget(self.file_list_widget)
@@ -144,15 +145,27 @@ class MainWindow(QMainWindow):
             self.file_list_widget.takeItem(self.file_list_widget.row(item))
 
     def dragEnterEvent(self, event: QDragEnterEvent):
-        # 记录到临时文件，便于打包后排查
-        with open("E:/temp/drag_log.txt", "a") as f:
-            f.write(f"dragEnterEvent: formats={event.mimeData().formats()}, hasUrls={event.mimeData().hasUrls()}\n")
+        # 先判断是否是文件拖拽，优先执行核心逻辑
+        if event.mimeData().hasUrls():
+            # 只接受本地文件链接，过滤网络链接
+            for url in event.mimeData().urls():
+                if url.isLocalFile():
+                    event.acceptProposedAction()
+                    return
+            # event.acceptProposedAction()
+        else:
+            # 非文件拖拽，交给父类处理
+            super().dragEnterEvent(event)
+
+    def dragMoveEvent(self, event: QDragMoveEvent):
+        # 拖拽移动时保持接受状态
         if event.mimeData().hasUrls():
             event.acceptProposedAction()
         else:
-            super().dragEnterEvent(event)
+            super().dragMoveEvent(event)
 
     def dropEvent(self, event: QDropEvent):
+        # 处理文件拖拽释放
         urls = event.mimeData().urls()
         for url in urls:
             file_path = url.toLocalFile()
@@ -160,6 +173,10 @@ class MainWindow(QMainWindow):
                 if not self.is_file_in_list(file_path):
                     self.file_list_widget.addItem(file_path)
         event.acceptProposedAction()
+
+    def dragLeaveEvent(self, event: QDragLeaveEvent):
+        event.accept()
+        super().dragLeaveEvent(event)
 
     def is_excel_file(self, path):
         ext = os.path.splitext(path)[1].lower()
