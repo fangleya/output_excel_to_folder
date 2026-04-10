@@ -5,7 +5,7 @@
 block_cipher = None
 
 a = Analysis(
-    ['main.py'],  # 你的入口文件
+    ['src/main.py'],  # 你的入口文件
     pathex=[],
     binaries=[],
     # -------------------------- 专属资源打包配置 --------------------------
