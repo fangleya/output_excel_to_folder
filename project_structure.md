@@ -9,9 +9,12 @@ output_excel_to_folder/          # 项目根目录（可大写开头，仅根目
 └── docs/       # 【强化】文档目录（补充分类，企业级需标准化）
 └── lib/       # 第三方依赖库（若有无法通过pip安装的包）
 └── resource/
-    ├── excel.ico
-    ├── icon.ico
+    ├── my_app.ico
 └── src/       # 核心源代码
+    ├── app/
+    │   ├── __init__.py
+    │   ├── app_view.py
+    │   ├── app_viewmodel.py
     ├── cfg/       # 配置模块（读取/解析配置文件）
     │   ├── __init__.py
     ├── config/
@@ -21,8 +24,6 @@ output_excel_to_folder/          # 项目根目录（可大写开头，仅根目
     │   ├── user_config.json
     │   ├── window_config.json
     ├── core/       # 核心业务层
-    │   ├── __init__.py
-    ├── logic/       # 业务逻辑
     │   ├── __init__.py
     ├── ui/       # UI文件目录
     │   ├── __init__.py
@@ -43,16 +44,21 @@ output_excel_to_folder/          # 项目根目录（可大写开头，仅根目
     ├── test_resource_manager.py
 └── tmp/       # 临时文件目录（日志、缓存等）
 └── .gitignore       # Git忽略文件（避免提交tmp/、__pycache__等）
+└── Excel导出工具.spec
+└── Excel导出工具_build.bat
 └── README.en.md
 └── README.md
 └── build.bat
 └── build.ps1.bak
 └── build.py
 └── build_simple.py
+└── cython_setup.py
 └── project_structure.md       # 目录说明文档
+└── project_structure.txt
 └── pyside6_excel_clean.spec
 └── read_project_structure.py
 └── requirements.txt       # 依赖清单（可通过pyproject.toml关联）
 └── run.py
 └── run_tests.py
+└── upx.exe
 ```
