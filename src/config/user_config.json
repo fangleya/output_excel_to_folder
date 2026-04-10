@@ -1,0 +1,21 @@
+{
+    "app_name": "src",
+    "auto_save_interval": 30,
+    "config_version": "1.0",
+    "last_add_file_path": "",
+    "max_recent_files": 10,
+    "output_path": "D:\\Documents",
+    "recent_dirs": {
+        "select_dir": "C:/",
+        "select_files": "E:/表格数据清洗测试"
+    },
+    "recent_files": [
+        "E:/表格数据清洗测试/评价管理_测试2_20260204.xlsx",
+        "E:/表格数据清洗测试/评价管理_测试2_20260204(1).xlsx",
+        "E:/表格数据清洗测试/评价管理_测试2.xlsx",
+        "E:/表格数据清洗测试/评价管理_测试1_20260204.xlsx",
+        "E:/表格数据清洗测试/评价管理_测试1_20260204(1).xlsx",
+        "E:/表格数据清洗测试/评价管理_测试1.xlsx"
+    ],
+    "version": "1.0.0"
+}

@@ -1,0 +1,8 @@
+{
+    "cache_size": 100,
+    "config_version": "1.0",
+    "log_level": "INFO",
+    "log_retention_days": 7,
+    "max_threads": 4,
+    "temp_dir": "C:\\Users\\admin\\AppData\\Local\\Temp"
+}

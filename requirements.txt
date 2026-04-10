@@ -1,0 +1,15 @@
+PySide6>=6.7.2
+pandas>=2.2.2
+openpyxl>=3.1.5
+Pillow>=10.4.0
+Cython>=3.0.11
+setuptools>=75.1.0
+PyInstaller>=6.10.0
+xlwings>=0.30.10
+pywin32>=306
+configparser>=5.3.0
+numpy>=1.23.0
+watchdog>=2.1.0
+pyautogui>=0.9.54
+pyperclip>=1.8.2
+pynput>=1.7.7

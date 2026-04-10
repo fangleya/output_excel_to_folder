@@ -1,0 +1,9 @@
+{
+    "auto_save": true,
+    "backup_count": 5,
+    "check_updates": true,
+    "config_version": "1.0",
+    "language": "zh_CN",
+    "save_interval": 300,
+    "version": "1.0.0"
+}

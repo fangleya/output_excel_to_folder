@@ -1,0 +1,53 @@
+# build.ps1 - PowerShell 打包脚本
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "     Excel数据清洗工具打包脚本" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
+
+# 检查Python环境
+try {
+    $pythonVersion = python --version 2>&1
+    Write-Host "[1/4] Python环境检测: $pythonVersion" -ForegroundColor Green
+} catch {
+    Write-Host "[错误] 未找到Python环境！" -ForegroundColor Red
+    Write-Host "请确保Python已安装并添加到PATH环境变量"
+    pause
+    exit 1
+}
+
+# 检查项目结构
+if (-not (Test-Path "src\main.py")) {
+    Write-Host "[错误] 找不到主程序文件 src\main.py" -ForegroundColor Red
+    Write-Host "请确保在项目根目录运行此脚本"
+    pause
+    exit 1
+}
+
+if (-not (Test-Path "resource\icon.ico")) {
+    Write-Host "[警告] 找不到图标文件 resource\icon.ico" -ForegroundColor Yellow
+}
+
+# 安装必要的依赖
+Write-Host "[2/4] 正在检查并安装依赖包..." -ForegroundColor Green
+pip install PyInstaller>=5.9.0 --quiet
+pip install xlwings>=0.29.1 --quiet
+pip install openpyxl>=3.0.10 --quiet
+pip install pandas>=1.5.0 --quiet
+pip install numpy>=1.23.0 --quiet
+
+# 清理旧文件
+Write-Host "[3/4] 正在清理旧的构建文件..." -ForegroundColor Green
+Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
+Get-ChildItem -Recurse -Directory -Filter "__pycache__" | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item *.spec -ErrorAction SilentlyContinue
+
+# 执行打包
+Write-Host "[4/4] 正在使用PyInstaller打包..." -ForegroundColor Green
+python build_simple.py
+
+Write-Host ""
+Write-Host "打包完成！" -ForegroundColor Green
+Write-Host "生成的文件在 dist 目录中"
+Write-Host "主要文件：dist\Excel数据清洗工具.exe"
+Write-Host ""
+pause
