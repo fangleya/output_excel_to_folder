@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
 
         self.settings = QSettings("MyCompany", "ExcelExportTool")
         self.last_output_dir = self.settings.value("last_output_dir", "")
-        if not self.last_output_dir or not os.path.exists(self.last_output_dir):
+        if not self.last_output_dir or not os.path.exists(self.last_output_dir):  # type: ignore
             self.last_output_dir = "C:/"
 
         self.setup_ui()
@@ -84,7 +84,7 @@ class MainWindow(QMainWindow):
         output_layout = QHBoxLayout()
         output_label = QLabel("输出根目录:")
         self.output_line_edit = QLineEdit()
-        self.output_line_edit.setText(self.last_output_dir)
+        self.output_line_edit.setText(self.last_output_dir)  # type: ignore
         self.output_line_edit.textChanged.connect(self.save_output_dir)
         browse_btn = QPushButton("浏览...")
         browse_btn.clicked.connect(self.browse_output_dir)

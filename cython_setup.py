@@ -56,5 +56,5 @@ if __name__ == "__main__":
             annotate=False,  # 调试时可改为True，生成编译分析报告
         ),
         # 编译后的pyd文件直接生成到原py文件所在目录，保持导入路径不变
-        options={"build_ext": {"inplace": True, "force": True}},
+        options={"build_ext": {"inplace": "True", "force": "True"}},
     )

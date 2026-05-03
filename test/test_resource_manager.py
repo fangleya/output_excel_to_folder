@@ -48,7 +48,7 @@ def test_resource_files():
         print(f"{status} {file_name}")
         if file_exists:
             print(f"   路径: {path}")
-            print(f"   文件大小: {os.path.getsize(path) if os.path.exists(path) else 'N/A'} 字节")
+            print(f"   文件大小: {os.path.getsize(path) if os.path.exists(path) else 'N/A'} 字节")  # type: ignore
         print("-" * 30)
 
     print("\n调试信息：")

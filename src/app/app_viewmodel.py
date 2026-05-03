@@ -150,7 +150,7 @@ def process_excel_to_files(excel_path, output_root, log_callback=None):
         os.makedirs(output_root, exist_ok=True)
         data_sequence = 0
         for row_idx, row_data in df.iterrows():
-            excel_row_number = row_idx + 2
+            excel_row_number = row_idx + 2  # type: ignore
             data_sequence += 1
             folder_name = str(data_sequence)
             folder_path = os.path.join(output_root, folder_name)
@@ -170,7 +170,7 @@ def process_excel_to_files(excel_path, output_root, log_callback=None):
                 col_name = f"评价图{img_seq}"
                 if col_name not in df.columns:
                     continue
-                col_idx = df.columns.get_loc(col_name) + 1
+                col_idx = df.columns.get_loc(col_name) + 1  # type: ignore
                 pos = (excel_row_number, col_idx)
                 if pos in cell_image_map:
                     row_image_count += 1
