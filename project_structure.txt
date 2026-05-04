@@ -9,7 +9,7 @@ output_excel_to_folder/          # 项目根目录（可大写开头，仅根目
 └── docs/       # 【强化】文档目录（补充分类，企业级需标准化）
 └── lib/       # 第三方依赖库（若有无法通过pip安装的包）
 └── resource/
-    ├── my_app.ico
+    ├── icon_app.ico
 └── src/       # 核心源代码
     ├── app/
     │   ├── __init__.py

@@ -53,3 +53,8 @@ __pycache__/
 *.zip
 *.rar
 *.exe
+
+# Build artifacts (Cython + PyInstaller)
+.build_backup/
+*.pyd
+*.c

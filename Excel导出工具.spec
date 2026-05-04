@@ -102,7 +102,7 @@ exe = EXE(
     strip=False,
     upx=True,  # 启用UPX压缩，减小体积
     console=False,  # 调试时改为True，开启控制台看报错，正式发布改为False
-    icon='resource/my_app.ico',  # 程序图标，对应你的resource目录下的ico文件
+    icon='resource/icon_app.ico',  # 程序图标，对应你的resource目录下的ico文件
     uac_admin=False,  # 如需处理系统盘文件，改为True请求管理员权限
     version='file_version_info.txt',  # 可选，添加版本信息，避免杀毒误报
 )

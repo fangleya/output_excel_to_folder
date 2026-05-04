@@ -37,7 +37,7 @@ def main():
     try:
         from src.utils.resource_manager import get_icon
 
-        app_icon = get_icon("my_app.ico")
+        app_icon = get_icon("icon_app.ico")
         if not app_icon.isNull():
             app.setWindowIcon(app_icon)
     except (ImportError, Exception):
